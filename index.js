@@ -10,7 +10,7 @@ const client = new Client({
 	],
 });
 const { request } = require('undici');
-
+const func = require("./components/functions.js") 
 
 
 
@@ -67,7 +67,7 @@ client.on('messageCreate', msg => {
 client.on('messageCreate', async msg => {
   if (msg.content === '!blue') {
     msg.channel.send("Tournament can be found: https://challonge.com/4eei93kk");
-    getBlue()
+    func.getBlue()
     .then(data => {
         msg.channel.send("Getting Players in the 🔵Blue League....");
         msg.channel.send("Current Standings");
@@ -78,7 +78,7 @@ client.on('messageCreate', async msg => {
 client.on('messageCreate', async msg => {
   if (msg.content === '!pink') {
     msg.channel.send("Tournament can be found: https://challonge.com/huk594jb");
-    axiosTest()
+    func.getPink()
     .then(data => {
         msg.channel.send("Getting Players in the 🟣Pink League....");
         msg.channel.send("Current Standings");
@@ -89,7 +89,7 @@ client.on('messageCreate', async msg => {
 client.on('messageCreate', async msg => {
   if (msg.content === '!black') {
     msg.channel.send("Tournament can be found: https://challonge.com/73ldr679");
-    getBlack()
+    func.getBlack()
     .then(data => {
         msg.channel.send("Getting Players in the ⚫Black League....");
         msg.channel.send("Current Standings");
@@ -100,7 +100,7 @@ client.on('messageCreate', async msg => {
 client.on('messageCreate', async msg => {
   if (msg.content === '!plat') {
     msg.channel.send("Tournament can be found: https://challonge.com/u4h7auz6");
-    getPlat()
+    func.getPlat()
     .then(data => {
         msg.channel.send("Getting Players in the ⚪Platinum League....");
         msg.channel.send("Current Standings");
@@ -109,30 +109,29 @@ client.on('messageCreate', async msg => {
 });
 
 
-client.on('messageCreate', async msg => {
-  if (msg.content === '!hb') {
-    const exampleEmbed = new EmbedBuilder()
-    .setColor('#0099ff')
-    .setTitle('TSC Snooker Highest Breaks')
-    .setAuthor({ name: 'The Snooker Club', iconURL: 'https://media.discordapp.net/attachments/847144886154821703/848132307721256961/Photo_1596994915532.png?width=690&height=683', url: 'https://discord.js.org' })
-   // .setThumbnail('https://media.discordapp.net/attachments/847144886154821703/848132307721256961/Photo_1596994915532.png?width=690&height=683')
-    .addFields(
-        { name: '🟤  Brown Ball League', value: 'https://www.creativesnooker.com/' },
-        { name: '🔵  Blue Ball League', value: 'https://www.creativesnooker.com/' },
-        { name: '🟣  Pink Ball League', value: 'https://www.creativesnooker.com/' },
-        { name: '⚫  Black Ball League', value: 'https://www.creativesnooker.com/' },
-    )
-    .setImage('https://cdn.discordapp.com/attachments/711353889475133483/948765968161730650/CC_20211231_131852.png?width=690&height=683')
-    .setTimestamp()
-    .setFooter({ 
-      text: 'The Snooker Club', 
-      iconURL: 'https://cdn.discordapp.com/attachments/711353889475133483/948765968161730650/CC_20211231_131852.png?width=690&height=683'
-    });
-  
-    msg.channel.send({ embeds: [exampleEmbed] });
-  }});
 
-
+  client.on('messageCreate', async msg => {
+    if (msg.content === '!hb') {
+      const exampleEmbed = new EmbedBuilder()
+      .setColor('#0099ff')
+      .setTitle('TSC Snooker Highest Breaks')
+      .setAuthor({ name: 'The Snooker Club', iconURL: 'https://media.discordapp.net/attachments/847144886154821703/848132307721256961/Photo_1596994915532.png?width=690&height=683', url: 'https://discord.js.org' })
+     // .setThumbnail('https://media.discordapp.net/attachments/847144886154821703/848132307721256961/Photo_1596994915532.png?width=690&height=683')
+      .addFields(
+          { name: '🟤  Brown Ball League', value: 'https://www.creativesnooker.com/' },
+          { name: '🔵  Blue Ball League', value: 'https://www.creativesnooker.com/' },
+          { name: '🟣  Pink Ball League', value: 'https://www.creativesnooker.com/' },
+          { name: '⚫  Black Ball League', value: 'https://www.creativesnooker.com/' },
+      )
+      .setImage('https://cdn.discordapp.com/attachments/711353889475133483/948765968161730650/CC_20211231_131852.png?width=690&height=683')
+      .setTimestamp()
+      .setFooter({ 
+        text: 'The Snooker Club', 
+        iconURL: 'https://cdn.discordapp.com/attachments/711353889475133483/948765968161730650/CC_20211231_131852.png?width=690&height=683'
+      });
+    
+      msg.channel.send({ embeds: [exampleEmbed] });
+    }});
 
 
 client.on('messageCreate', async msg => {
@@ -143,28 +142,6 @@ client.on('messageCreate', async msg => {
 		msg.channel.send({ files: [file] });
 	}
 });
-
-function getBrown() {
-  return axios.get("https://api.challonge.com/v1/tournaments/73ldr679/participants.json?api_key=3TKGyRJOejDpPiINIgfpJfpWlFZRFXwPb6vceiRc").then(response => response.data)
-}
-
-function getBlue() {
-  return axios.get("https://api.challonge.com/v1/tournaments/4eei93kk/participants.json?api_key=3TKGyRJOejDpPiINIgfpJfpWlFZRFXwPb6vceiRc").then(response => response.data)
-}
-
-  function axiosTest() {
-    return axios.get("https://api.challonge.com/v1/tournaments/huk594jb/participants.json?api_key=3TKGyRJOejDpPiINIgfpJfpWlFZRFXwPb6vceiRc").then(response => response.data)
-}
-
-function getBlack() {
-  return axios.get("https://api.challonge.com/v1/tournaments/73ldr679/participants.json?api_key=3TKGyRJOejDpPiINIgfpJfpWlFZRFXwPb6vceiRc").then(response => response.data)
-}
-
-function getPlat() {
-  return axios.get("https://api.challonge.com/v1/tournaments/u4h7auz6/participants.json?api_key=3TKGyRJOejDpPiINIgfpJfpWlFZRFXwPb6vceiRc").then(response => response.data)
-}
-
-
 
 
 async function replyWithInvite(message) {
