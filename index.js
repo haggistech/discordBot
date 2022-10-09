@@ -10,15 +10,19 @@ const client = new Client({
 	],
 });
 
+
 const func = require("./components/functions.js") 
 
-client.on('message', async msg => {
-  switch (msg.content) {
-    case "ping":
-      msg.reply("Pong!");
-      break;
+
+
+
+client.on('messageCreate', msg => {
+  if (msg.content === '!csyt') {
+    msg.channel.send("https://www.youtube.com/channel/UCWh1kMHFOXLs1t9_tNFWBcQ");
   }
 });
+
+
 
 client.on('messageCreate', msg => {
   if (msg.content === 'Ping') {
